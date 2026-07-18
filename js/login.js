@@ -1,19 +1,36 @@
+const users = [
+{
+    email:"admin@sol.com",
+    password:"admin123",
+    role:"admin",
+    name:"SOL Leader"
+},
+{
+    email:"member@sol.com",
+    password:"member123",
+    role:"member",
+    name:"SOL Member"
+}
+];
+
 function login(){
 
-const email=document.getElementById("email").value;
+    const email=document.getElementById("email").value;
+    const password=document.getElementById("password").value;
 
-const password=document.getElementById("password").value;
+    const user=users.find(u=>u.email===email && u.password===password);
 
-if(email==="" || password===""){
+    if(!user){
+        alert("Wrong Email or Password");
+        return;
+    }
 
-alert("Please fill all fields");
+    localStorage.setItem("user",JSON.stringify(user));
 
-return;
-
-}
-
-localStorage.setItem("userEmail",email);
-
-window.location="dashboard.html";
+    if(user.role==="admin"){
+        window.location="admin.html";
+    }else{
+        window.location="dashboard.html";
+    }
 
 }
