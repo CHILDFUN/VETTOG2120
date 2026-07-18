@@ -4,34 +4,58 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>SOL HUB Admin</title>
+<title>SOL HUB - Admin Panel</title>
 
 <link rel="stylesheet" href="css/admin.css">
 
 </head>
-<script src="js/adminAuth.js"></script>
+
 <body>
+
+<script>
+
+// حماية الصفحة
+const user = JSON.parse(localStorage.getItem("solUser"));
+
+if(!user){
+
+    window.location.href="login.html";
+
+}
+
+if(user.role!="admin"){
+
+    alert("Access Denied!");
+
+    window.location.href="dashboard.html";
+
+}
+
+</script>
 
 <div class="sidebar">
 
-<h2>ADMIN</h2>
+<h2>SOL ADMIN</h2>
 
 <ul>
 
-<li onclick="show('dashboard')">📊 Dashboard</li>
+<li>📊 Dashboard</li>
 
-<li onclick="show('users')">👥 Users</li>
+<li>👥 Members</li>
 
-<li onclick="show('events')">📅 Events</li>
+<li>💬 Chat</li>
 
-<li onclick="show('codes')">🎁 Gift Codes</li>
+<li>📅 Events</li>
 
-<li onclick="show('news')">📰 News</li>
+<li>🎁 Gift Codes</li>
 
-<li onclick="show('settings')">⚙ Settings</li>
+<li>📰 News</li>
+
+<li>⚙ Settings</li>
+
+<li onclick="logout()">🚪 Logout</li>
 
 </ul>
 
@@ -39,53 +63,52 @@
 
 <div class="main">
 
-<h1>Administration Panel</h1>
+<h1 id="adminName"></h1>
 
 <div class="stats">
 
 <div class="box">
-
-<h3>Users</h3>
-
-<p id="usersCount">132</p>
-
+<h3>Members</h3>
+<p>132</p>
 </div>
 
 <div class="box">
-
 <h3>Online</h3>
-
-<p id="onlineCount">41</p>
-
+<p>41</p>
 </div>
 
 <div class="box">
-
 <h3>Events</h3>
-
-<p id="eventsCount">6</p>
-
+<p>5</p>
 </div>
 
 <div class="box">
-
-<h3>Reports</h3>
-
-<p>2</p>
-
+<h3>Gift Codes</h3>
+<p>12</p>
 </div>
 
 </div>
 
-<div id="content">
+<h2>Administrator Control Panel</h2>
 
-<h2>Welcome Administrator</h2>
-
-</div>
+<p>You have full access to manage SOL HUB.</p>
 
 </div>
 
-<script src="js/admin.js"></script>
+<script>
+
+document.getElementById("adminName").innerHTML =
+"Welcome " + user.name;
+
+function logout(){
+
+localStorage.removeItem("solUser");
+
+window.location.href="login.html";
+
+}
+
+</script>
 
 </body>
 
