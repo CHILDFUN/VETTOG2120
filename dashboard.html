@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>SOL HUB Dashboard</title>
 
 <link rel="stylesheet" href="css/dashboard.css">
@@ -21,19 +17,17 @@
 
 <ul>
 
-<li onclick="openPage('home')">🏠 Home</li>
+<li onclick="window.location='dashboard.html'">🏠 Dashboard</li>
 
-<li onclick="openPage('members')">👥 Members</li>
+<li onclick="window.location='members.html'">👥 Members</li>
 
-<li onclick="openPage('chat')">💬 Chat</li>
+<li onclick="window.location='chat.html'">💬 Chat</li>
 
-<li onclick="openPage('events')">📅 Events</li>
+<li onclick="window.location='events.html'">📅 Events</li>
 
-<li onclick="openPage('gift')">🎁 Gift Codes</li>
+<li onclick="window.location='giftcodes.html'">🎁 Gift Codes</li>
 
-<li onclick="openPage('ranking')">🏆 Rankings</li>
-
-<li onclick="openPage('settings')">⚙ Settings</li>
+<li onclick="logout()">🚪 Logout</li>
 
 </ul>
 
@@ -41,60 +35,54 @@
 
 <div class="content">
 
-<h1>Welcome to SOL HUB</h1>
+<h1 id="welcome"></h1>
 
 <div class="cards">
 
 <div class="card">
-
 <h3>Total Members</h3>
-
-<p id="members">132</p>
-
+<p>132</p>
 </div>
 
 <div class="card">
-
 <h3>Online</h3>
-
-<p id="online">41</p>
-
+<p>41</p>
 </div>
 
 <div class="card">
-
 <h3>Events</h3>
-
-<p id="events">5</p>
-
+<p>5</p>
 </div>
 
 <div class="card">
-
 <h3>Gift Codes</h3>
-
-<p id="codes">12</p>
-
-</div>
-
-</div>
-
-<div class="news">
-
-<h2>Alliance News</h2>
-
-<div id="newsList">
-
-<p>Welcome to SOL HUB.</p>
-
+<p>12</p>
 </div>
 
 </div>
 
 </div>
 
-<script src="js/dashboard.js"></script>
+<script>
+
+const user = JSON.parse(localStorage.getItem("solUser"));
+
+if(!user){
+    window.location.href="login.html";
+}
+
+document.getElementById("welcome").innerHTML =
+"Welcome, " + user.name;
+
+function logout(){
+
+localStorage.removeItem("solUser");
+
+window.location.href="login.html";
+
+}
+
+</script>
 
 </body>
-
 </html>
